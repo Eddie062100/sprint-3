@@ -210,13 +210,15 @@
       if (this.ants.length === 0) {
         return "No ants here. Did you work them to death?"
       }
+      const numAntsWorking = this.ants.length;
+
       this.ants = this.ants.map(ant => {
         ant.health -= 20;
         return ant
        })
       this.ants=this.ants.filter(ant => ant.health > 0)
 
-       return `${this.ants.length} ants starting work!`
+       return `${numAntsWorking} ants starting work!`
        
       }
 
@@ -226,22 +228,22 @@
 
 
        feed(antName) {
-        const antToFeed = this.ants.find(ant => ant.name === antName)
-
-        if (antToFeed) {
-          antToFeed.health += 15
+        const antToFeed = this.ants.filter(ant => ant.name === antName)
+       
+        if (antToFeed.length > 0) {
+          antToFeed.forEach(ant => {
+            ant.health =+ 115
+          }) 
           return 'Yum!'
-
         } else {
-
           return `${antName} not found!` 
           
         }
         
        }
     }
-    const farm = new AntFarm('Jess', 'Blake', 'eddie')
-    console.log(farm.work())
+    const farm = new AntFarm('Jess', 'Blake', 'Jess')
+    console.log(farm.feed('Jess'))
   
 
 
